@@ -1,11 +1,15 @@
+# The way can remove proper nouns without wordnet
 import nltk
-import ssl
+from nltk.tag import pos_tag
 
-try:
-    _create_unverified_https_context = ssl._create_unverified_context
-except AttributeError:
-    pass
-else:
-    ssl._create_default_https_context = _create_unverified_https_context
+sentence = "Michael Jackson likes to eat at McDonalds"
+tagged_sent = pos_tag(sentence.split())
+# [('Michael', 'NNP'), ('Jackson', 'NNP'), ('likes', 'VBZ'), ('to', 'TO'), ('eat', 'VB'), ('at', 'IN'), ('McDonalds', 'NNP')]
+print(tagged_sent)
+propernouns = [word for word,pos in tagged_sent if pos == 'NNP']
+# ['Michael','Jackson', 'McDonalds']
 
-nltk.download('averaged_perceptron_tagger')
+tagged_sentence = nltk.tag.pos_tag(sentence.split())
+edited_sentence = [word for word,tag in tagged_sentence if tag != 'NNP' and tag != 'NNPS']
+print(' '.join(edited_sentence))
+# I am named
