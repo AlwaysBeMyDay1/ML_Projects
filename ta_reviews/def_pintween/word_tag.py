@@ -16,10 +16,6 @@ from nltk.tag import pos_tag
 # .     ||  punctuation marks    ||  . , ; !
 # X     ||  other                ||  ersatz, esprit, dunno, gr8, univeristy
 
-def extract_proper_noun(text):
-    tagged_text = pos_tag(text.split())
-    propernouns = [word for word,pos in tagged_text if pos == 'NNP']
-    return propernouns
 
 def remove_proper_noun(text):
     tagged_text = pos_tag(text.split())
@@ -27,10 +23,27 @@ def remove_proper_noun(text):
     cleaned_text = ' '.join(non_propernouns)
     return cleaned_text
 
+def extract_proper_noun(text):
+    tagged_text = pos_tag(text.split())
+    propernouns = [word for word,pos in tagged_text if pos == 'NNP']
+    return propernouns
+
+def extract_noun(text):
+    tagged_text = pos_tag(text.split())
+    nouns = [word for word,pos in tagged_text if pos == 'NN']
+    cleaned_text = ' '.join(nouns)
+    return cleaned_text
+
 def remove_adjective(text):
     tagged_text = pos_tag(text.split())
-    non_adjective = [word for word,tag in tagged_text if tag != 'ADJ']
+    non_adjective = [word for word,tag in tagged_text if tag != 'JJ']
     cleaned_text = ' '.join(non_adjective)
+    return cleaned_text
+
+def extract_adjective(text):
+    tagged_text = pos_tag(text.split())
+    adjectives = [word for word,tag in tagged_text if tag == 'JJ']
+    cleaned_text = ' '.join(adjectives)
     return cleaned_text
 
 # return False if inputted word is all proper nouns
