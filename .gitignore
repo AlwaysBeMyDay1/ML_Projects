@@ -7,6 +7,9 @@ __pycache__/
 *.so
 
 YAKE/*.json
+osm/*.json
+osm/*.osm
+osm/*.osm.pbf
 
 # Distribution / packaging
 .Python
